@@ -73,5 +73,6 @@ This project is a static web application and can be deployed directly to any sta
 
 ## Links
 
+- **Email**: [work.affaan@gmail.com](mailto:work.affaan@gmail.com)
 - **GitHub**: [github.com/mohammadaffaan1](https://github.com/mohammadaffaan1)
 - **LinkedIn**: [linkedin.com/in/mohammad-affaan-7514a0261](https://www.linkedin.com/in/mohammad-affaan-7514a0261/)
