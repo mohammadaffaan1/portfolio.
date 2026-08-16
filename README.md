@@ -25,7 +25,7 @@ I am a Computer Science student building toward AI/ML engineering through practi
 - **Vanilla JavaScript (ES6+)**:
   - Canvas particle network background with `requestAnimationFrame` and visibility pausing.
   - `IntersectionObserver` for scroll-triggered reveal animations and active navigation highlighting.
-  - Dynamic GitHub REST API integration for public repository display.
+  - Dynamic GitHub REST API integration with XSS sanitation for public repository display.
   - Full support for `prefers-reduced-motion`.
 
 ## Project Structure
@@ -58,6 +58,18 @@ npx serve . -l 3000
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Deployment Notes
+
+This project is a static web application and can be deployed directly to any static hosting service without build configurations:
+- **Vercel**: Import repository root, framework preset: `Other`.
+- **GitHub Pages**: Deploy from `main` branch root.
+- **Netlify / Cloudflare Pages**: Publish directory: `./`.
+
+## Security
+
+- This is a client-side static repository containing zero private credentials or API keys.
+- Any future backend integrations or third-party service tokens must be supplied through server-side environment variables and never committed to version control.
 
 ## Links
 

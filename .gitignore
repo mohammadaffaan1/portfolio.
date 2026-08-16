@@ -7,9 +7,12 @@ desktop.ini
 .env
 .env.local
 .env.*.local
+.env.*
 *.pem
 *.key
 *.token
+*.cert
+*.crt
 
 # Editor and IDE directories
 .vscode/
@@ -17,7 +20,15 @@ desktop.ini
 *.swp
 *.swo
 
+# Build artifacts & package manager folders (if ever added)
+node_modules/
+dist/
+build/
+*.tsbuildinfo
+
 # Logs and system files
 *.log
+npm-debug.log*
+yarn-debug.log*
 scratch/
 .system_generated/

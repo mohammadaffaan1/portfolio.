@@ -281,35 +281,48 @@ async function initGitHubRepos() {
     if (!response.ok) return;
     
     const repos = await response.json();
-    if (!repos || !repos.length) return;
+    if (!Array.isArray(repos) || !repos.length) return;
 
-    // Filter out forks, take top 3 non-fork repos
+    // Filter out forks and user profile config repository
     const filtered = repos
-      .filter(r => !r.fork && r.name !== 'mohammadaffaan1')
+      .filter(r => r && !r.fork && r.name !== 'mohammadaffaan1')
       .slice(0, 3);
 
     if (!filtered.length) return;
 
-    container.innerHTML = filtered.map(repo => `
-      <a href="${repo.html_url}" class="github-repo" target="_blank" rel="noopener noreferrer">
-        <h4 class="github-repo-name">${escapeHtml(repo.name)}</h4>
-        <p class="github-repo-desc">${escapeHtml(repo.description || 'No description provided')}</p>
-        <div class="github-repo-meta">
-          ${repo.language ? `<span class="github-repo-lang">${escapeHtml(repo.language)}</span>` : ''}
-          ${repo.stargazers_count > 0 ? `<span>★ ${repo.stargazers_count}</span>` : ''}
-        </div>
-      </a>
-    `).join('');
+    container.innerHTML = filtered.map(repo => {
+      const rawUrl = typeof repo.html_url === 'string' ? repo.html_url : '';
+      const safeUrl = rawUrl.startsWith('https://github.com/') ? rawUrl : 'https://github.com/mohammadaffaan1';
+      const name = escapeHtml(repo.name || 'Repository');
+      const desc = escapeHtml(repo.description || 'No description provided');
+      const lang = repo.language ? escapeHtml(repo.language) : '';
+      const stars = Number.isInteger(repo.stargazers_count) && repo.stargazers_count > 0 ? repo.stargazers_count : 0;
+
+      return `
+        <a href="${safeUrl}" class="github-repo" target="_blank" rel="noopener noreferrer">
+          <h4 class="github-repo-name">${name}</h4>
+          <p class="github-repo-desc">${desc}</p>
+          <div class="github-repo-meta">
+            ${lang ? `<span class="github-repo-lang">${lang}</span>` : ''}
+            ${stars > 0 ? `<span>★ ${stars}</span>` : ''}
+          </div>
+        </a>
+      `;
+    }).join('');
   } catch (e) {
-    // Silently fail — the link to the GitHub profile is always available
+    // Silently fail — the direct profile link is always available
   }
 }
 
 /**
- * Utility: Escape HTML to prevent XSS from API data
+ * Utility: Pure-function HTML Escaping (XSS Prevention)
  */
-function escapeHtml(text) {
-  const div = document.createElement('div');
-  div.textContent = text;
-  return div.innerHTML;
+function escapeHtml(str) {
+  if (typeof str !== 'string') return '';
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
 }
