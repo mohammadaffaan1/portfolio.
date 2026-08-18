@@ -33,4 +33,9 @@ yarn-debug.log*
 scratch/
 .system_generated/
 
+# Vercel CLI cache
 .vercel
+
+# Internal audit reports
+*AUDIT*.md
+*audit*.md
