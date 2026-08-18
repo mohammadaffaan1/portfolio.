@@ -15,7 +15,7 @@ I am a Computer Science student building toward AI/ML engineering through practi
   A personal finance platform designed to help users track spending, understand financial habits, and receive personalized savings guidance.
 - **ViralForge** (`React`, `Node.js`, `AI APIs`, `Generative AI`)
   An AI-powered creator toolkit for generating hooks, ideas, replies, threads, and content optimization workflows.
-- **LeafLens** (`IoT`, `AI`, `Software`)
+- **PlantGuard** (`IoT`, `AI`, `Software`)
   An IoT-oriented hydroponics project exploring intelligent monitoring and technology-assisted plant management.
 
 ## Tech Stack
